@@ -2,12 +2,12 @@
 
 struct Date {
     public:
-        int Day(){ return day; }
-        void Day(int d) {day = d;}
+        int Day(){ return day; } // getter -- Accessor function
+        void Day(int d) {day = d;} //setter -- Mutator function
     int month{1};
     int year{1970};
     private:
-        int day{1};
+        int day{1}; // Private member
 };
 
 int main() {
