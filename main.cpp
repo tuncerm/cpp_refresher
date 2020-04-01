@@ -1,5 +1,6 @@
 #include <cassert>
 #include <iostream>
+#include <string>
 
 class Date {
 public:
@@ -34,9 +35,23 @@ void Date::Month(int month) {
 
 void Date::Year(int year) { Date::year = year; }
 
+class Person{
+    public:
+        Person(std::string n): name(n){};
+        std::string name;
+};
+
+// Can also use struct here.
+//struct Person{ // struct members are public by default.
+//    Person(std::string n): name(n){};
+//    std::string name;
+//};
+
 // Test in main
 int main()
 {
+    Person Ali = Person("Ali");
+    std::cout << Ali.name << "\n";
     Date date(8,29,1981);
     assert(date.Day() == 8);
     assert(date.Month() != 29);
