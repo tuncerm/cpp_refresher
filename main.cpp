@@ -5,15 +5,11 @@ class Date {
 public:
     Date(int d, int m, int y);
     int Day() { return day; }
-    void Day(int d) {
-        if (d >= 1 && d <= 31) day = d;
-    }
+    void Day(int d);
     int Month() { return month; }
-    void Month(int m) {
-        if (m >= 1 && m <= 12) month = m;
-    }
+    void Month(int m);
     int Year() { return year; }
-    void Year(int y) { year = y; }
+    void Year(int y);
 
 private:
     int day{1};
@@ -26,6 +22,17 @@ Date::Date(int d, int m, int y) {
     Month(m);
     Year(y);
 }
+void Date::Day(int day) {
+    if(day >= 1 && day <= 31)
+        Date::day = day;
+}
+
+void Date::Month(int month) {
+    if(month >= 1 && month <= 12)
+        Date::month = month;
+}
+
+void Date::Year(int year) { Date::year = year; }
 
 // Test in main
 int main()
