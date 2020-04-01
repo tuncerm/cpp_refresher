@@ -35,10 +35,15 @@ void Date::Month(int month) {
 
 void Date::Year(int year) { Date::year = year; }
 
+//class Person{
+//    public:
+//        Person(std::string n): name(n){};
+//        std::string name;
+//};
 class Person{
     public:
-        Person(std::string n): name(n){};
-        std::string name;
+        Person(std::string const &n): name(n){}; // if used to initialize, the reference should also be a const.
+        std::string const name;
 };
 
 // Can also use struct here.
