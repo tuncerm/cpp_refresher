@@ -47,14 +47,28 @@ class Person{
 //    std::string name;
 //};
 
+class Birthday {
+    public:
+        Birthday(int day, int month, int year) : day(day), month(month), year(year){}
+        void Print(){
+            std::cout << day << "/" << month << "/" << year << "\n";
+        }
+    private:
+        int const day;
+        int const month;
+        int const year;
+};
+
 // Test in main
 int main()
 {
     Person Ali = Person("Ali");
     std::cout << Ali.name << "\n";
     Date date(8,29,1981);
+    Birthday bday(8, 7, 1986);
     assert(date.Day() == 8);
     assert(date.Month() != 29);
     assert(date.Year() == 1981);
     std::cout << date.Day() << "/" << date.Month() << "/" << date.Year() << "\n";
+    bday.Print();
 }
