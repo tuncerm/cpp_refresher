@@ -3,11 +3,7 @@
 
 class Date {
 public:
-    Date(int d, int m, int y) {
-        Day(d);
-        Month(m);
-        Year(y);
-    }
+    Date(int d, int m, int y);
     int Day() { return day; }
     void Day(int d) {
         if (d >= 1 && d <= 31) day = d;
@@ -25,6 +21,11 @@ private:
     int year{0};
 };
 
+Date::Date(int d, int m, int y) {
+    Day(d);
+    Month(m);
+    Year(y);
+}
 
 // Test in main
 int main()
