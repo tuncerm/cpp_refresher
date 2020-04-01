@@ -1,21 +1,23 @@
-#include <iostream>
 #include <cassert>
+#include <iostream>
 
 class Date {
 public:
+    Date(int d, int m, int y) {
+        Day(d);
+        Month(m);
+        Year(y);
+    }
     int Day() { return day; }
     void Day(int d) {
         if (d >= 1 && d <= 31) day = d;
     }
     int Month() { return month; }
     void Month(int m) {
-        if(m >= 1 && m <= 12)
-            month = m;
+        if (m >= 1 && m <= 12) month = m;
     }
     int Year() { return year; }
-    void Year(int y) {
-        year = y;
-    }
+    void Year(int y) { year = y; }
 
 private:
     int day{1};
@@ -23,15 +25,13 @@ private:
     int year{0};
 };
 
+
 // Test in main
 int main()
 {
-    Date date;
-    date.Day(-1);
-    date.Month(14);
-    date.Year(2000);
-    assert(date.Day() != -1);
-    assert(date.Month() != 14);
-    assert(date.Year() == 2000);
+    Date date(8,29,1981);
+    assert(date.Day() == 8);
+    assert(date.Month() != 29);
+    assert(date.Year() == 1981);
     std::cout << date.Day() << "/" << date.Month() << "/" << date.Year() << "\n";
 }
