@@ -17,11 +17,11 @@ private:
     int year{0};
 };
 
-Date::Date(int d, int m, int y) {
-    Day(d);
-    Month(m);
-    Year(y);
+Date::Date(int day, int month, int year) : year(year) {
+    Day(day);
+    Month(month);
 }
+
 void Date::Day(int day) {
     if(day >= 1 && day <= 31)
         Date::day = day;
