@@ -1,6 +1,9 @@
 #include <cassert>
 #include <iostream>
 #include <string>
+#include <stdexcept>
+
+using std::string;
 
 class BankAccount {
 
@@ -100,6 +103,114 @@ private:
     int const year;
 };
 
+
+class Car {
+    // TODO: Declare private attributes
+private:
+    char *brand;
+    // TODO: Declare getter and setter for brand
+public:
+    void SetBrand(std::string);
+    std::string GetBrand() const;
+    float horsepower{0};
+    float weight{0};
+};
+
+// Define setters
+void Car::SetBrand(std::string brand_name){
+    Car::brand = new char[brand_name.length() + 1];
+    strcpy(Car::brand, brand_name.c_str());
+}
+// Define getters
+std::string Car::GetBrand() const{
+    std::string result = "Brand name: ";
+    // Specifying string for output of brand name
+    result += Car::brand;
+    return result;
+}
+
+class Pyramid{
+public:
+    Pyramid(int length, int width, int height):
+            length_(length), width_(width), height_(height){
+        Validate();
+    }
+    int Length(){return length_;}
+    int Width(){return width_;}
+    int Height(){return height_;}
+    void Length(int);
+    void Width(int);
+    void Height(int);
+    int Volume();
+private:
+    int length_, width_, height_;
+    bool Check(double d){return d > 0;}
+    void Validate() {
+        if (length_ <= 0 || width_ <= 0 || height_ <= 0)
+            throw std::invalid_argument("negative dimension");
+    }
+};
+
+void Pyramid::Length(int d){
+    if(Check(d)){
+        length_ = d;
+    }
+}
+void Pyramid::Width(int d){
+    if(Check(d)){
+        width_ = d;
+    }
+}
+void Pyramid::Height(int d){
+    if(Check(d)){
+        height_ = d;
+    }
+}
+int Pyramid::Volume(){
+    return (width_ * height_ * length_) / 3;
+}
+
+class Student {
+public:
+    // constructor
+    Student(string name, int grade, float gpa) : name_(name), grade_(grade), gpa_(gpa) {
+        Validate();
+    }
+    // accessors
+    string Name() const {
+        return name_;
+    }
+    int Grade() const {
+        return grade_;
+    }
+    float GPA() const {
+        return gpa_;
+    }
+
+    // mutators
+    void Name(string name) {
+        name_ = name;
+        Validate();
+    }
+    void Grade(int grade) {
+        grade_ = grade;
+        Validate();
+    }
+    void GPA(float gpa) {
+        gpa_ = gpa;
+        Validate();
+    }
+
+private:
+    string name_;
+    int grade_;
+    float gpa_;
+    void Validate() {
+        if(Grade() < 0 || Grade() > 12 || GPA() < 0.0 || GPA() > 4.0)
+            throw std::invalid_argument("argument out of bounds");
+    }
+};
+
 // Test in main
 int main() {
     Person Ali = Person("Ali");
@@ -114,4 +225,37 @@ int main() {
 
     BankAccount account("12312313", "Pikachu", 99.99);
     account.PrintInfo();
+
+    Car car;
+    car.SetBrand("Peugeot");
+    std::cout << car.GetBrand() << "\n";
+
+    Pyramid pyramid(4, 5, 6);
+    assert(pyramid.Length() == 4);
+    assert(pyramid.Width() == 5);
+    assert(pyramid.Height() == 6);
+    assert(pyramid.Volume() == 40);
+
+    bool caught{false};
+    try {
+        Pyramid invalid(-1, 2, 3);
+    } catch (...) {
+        caught = true;
+    }
+    assert(caught);
+
+
+    Student david("David Silver", 10, 4.0);
+    assert(david.Name() == "David Silver");
+    assert(david.Grade() == 10);
+    assert(david.GPA() == 4.0);
+
+    caught = false;
+    try {
+        david.Grade(20);
+    }
+    catch(...) {
+        caught = true;
+    }
+    assert(caught);
 }
